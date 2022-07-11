@@ -5,9 +5,19 @@ const order = db.orders;
 const getAllOrders = async (req, res) => {
 
    let ordersList = await order.findAll()
-
    res.status(200).send(ordersList)
 
 }
 
-module.exports = {getAllOrders};
+const getAllOrdersPaginated = async (req, res) => {
+      let ordersList = await order.findAll({
+      limit: parseInt(req.query.limit),
+      offset: parseInt(req.query.offset)
+  })
+       res.status(200).send(ordersList)
+}
+
+module.exports = {
+   getAllOrders,
+   getAllOrdersPaginated
+};

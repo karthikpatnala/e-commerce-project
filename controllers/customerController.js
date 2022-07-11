@@ -11,6 +11,17 @@ const getAllCustomers = async (req, res) => {
 
 }
 
+const getAllCustomersPaginated = async (req, res) => {
+
+    let customerList = await customer.findAll({
+        limit: parseInt(req.query.limit),
+        offset: parseInt(req.query.offset)
+    })
+
+    res.status(200).send(customerList)
+
+}
+
 
 const getCustomerOrders =  async (req, res) => {
 
@@ -28,4 +39,8 @@ const getCustomerOrders =  async (req, res) => {
 
 }
 
-module.exports = {getAllCustomers,getCustomerOrders};
+module.exports = {
+    getAllCustomers,
+    getCustomerOrders,
+    getAllCustomersPaginated 
+};

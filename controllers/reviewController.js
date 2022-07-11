@@ -4,8 +4,7 @@ const Review = db.reviews
 const addReview = async (req, res) => {
 
     const id = parseInt(req.params.id)
-
-    let info = {
+     let info = {
         productId: id,
         rating: req.body.rating,
         description: req.body.description
@@ -20,6 +19,12 @@ const addReview = async (req, res) => {
 
 const getAllReviews = async (req, res) => {
 
+    const reviews = await Review.findAll({})
+    res.status(200).send(reviews)
+
+}
+const getAllReviewsPaginated = async (req, res) => {
+
     const reviews = await Review.findAll({
         limit: parseInt(req.query.limit),
         offset: parseInt(req.query.offset)
@@ -27,8 +32,8 @@ const getAllReviews = async (req, res) => {
     res.status(200).send(reviews)
 
 }
-
 module.exports = {
     addReview,
-    getAllReviews
+    getAllReviews,
+    getAllReviewsPaginated
 }

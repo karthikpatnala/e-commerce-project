@@ -18,7 +18,7 @@ const product = await Product.create(info)
 }
 
 
-const getAllProducts = async (req, res) => {
+const getAllProductsPaginated = async (req, res) => {
    console.log(req.query.limit)
     let products = await Product.findAll({
         limit: parseInt(req.query.limit),
@@ -28,6 +28,13 @@ const getAllProducts = async (req, res) => {
     res.status(200).send(products)
 
 }
+const getAllProducts = async (req, res) => {
+    console.log(req.query.limit)
+     let products = await Product.findAll({})
+ 
+     res.status(200).send(products)
+ 
+ }
 
 
 const getOneProduct = async (req, res) => {
@@ -90,5 +97,6 @@ module.exports = {
     updateProduct,
     deleteProduct,
     getProductReviews,
+    getAllProductsPaginated
     
 }

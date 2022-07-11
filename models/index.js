@@ -36,16 +36,17 @@ const db = {}
 db.Sequelize = Sequelize
 db.sequelize = sequelize
 
-db.sequelize.sync({alter:true})
- .then(() => {
-     console.log('re sync applied successfully!')
-})
+
 
 
 db.products = require('./product.js')(sequelize, DataTypes)
 db.reviews = require('./review.js')(sequelize, DataTypes)
 db.orders = require('./orders.js')(sequelize, DataTypes)
 db.customers = require('./customers.js')(sequelize, DataTypes)
+db.sequelize.sync({alter:true})
+ .then(() => {
+     console.log('re sync applied successfully!')
+})
 
 
 db.products.hasMany(db.reviews, {

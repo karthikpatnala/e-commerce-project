@@ -23,7 +23,8 @@ router.post('/addReview/:id', reviewController.addReview)
 
 router.get('/allOrders', orderController.getAllOrders) 
 router.get('/allOrdersPaginated', orderController.getAllOrdersPaginated)
-router.get('/getOrderedProducts/:id', orderController.getOrderedProducts)
+router.get('/getOrderedProductsEager/:id', orderController.getOrderedProductsEager)
+router.get('/getOrderedProductsLazy/:id', orderController.getOrderedProductsLazy)
 
 
 router.get('/allCustomers', customerController.getAllCustomers)

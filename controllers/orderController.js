@@ -18,7 +18,7 @@ const getAllOrdersPaginated = async (req, res) => {
 }
 
 
-const getOrderedProducts =  async (req, res) => {
+const getOrderedProductsEager =  async (req, res) => {
 
    const id = req.params.id
 
@@ -34,9 +34,20 @@ const getOrderedProducts =  async (req, res) => {
 
 }
 
+const getOrderedProductsLazy =  async (req, res) => {
+
+   const id = req.params.id 
+
+   const order1 = await order.findByPk(id);
+   const product1  = await order1.getProduct();
+   res.status(200).send(product1)
+
+}
+
 module.exports = {
    getAllOrders,
    getAllOrdersPaginated,
-   getOrderedProducts
+   getOrderedProductsEager,
+   getOrderedProductsLazy
 
 };

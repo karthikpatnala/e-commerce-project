@@ -23,7 +23,7 @@ const getAllCustomersPaginated = async (req, res) => {
 }
 
 
-const getCustomerOrders =  async (req, res) => {
+const getCustomerOrdersEager =  async (req, res) => {
 
     const id = req.params.id
 
@@ -39,8 +39,19 @@ const getCustomerOrders =  async (req, res) => {
 
 }
 
+const getCustomerOrdersLazy =  async (req, res) => {
+
+    const id = req.params.id 
+
+    const customer1 = await customer.findByPk(id);
+    const order1  = await customer1.getOrders();
+    res.status(200).send(order1)
+
+}
+
 module.exports = {
     getAllCustomers,
-    getCustomerOrders,
+    getCustomerOrdersEager,
+    getCustomerOrdersLazy,
     getAllCustomersPaginated 
 };

@@ -8,11 +8,12 @@ router.get('/testing',(req,res)=>{res.send('testing api working')})
 
 router.post('/addProduct' , productController.addProduct)
 router.get('/allProducts', productController.getAllProducts)
-router.get('/allProductsPaginated', productController.getAllProductsPaginated)
-router.get('/getProductReviews/:id', productController.getProductReviews)
 router.get('/productDetails/:id', productController.getOneProduct)
 router.put('/productEdit/:id', productController.updateProduct)
 router.delete('/deleteProduct/:id', productController.deleteProduct)
+router.get('/allProductsPaginated', productController.getAllProductsPaginated)
+router.get('/getProductReviewsEager/:id', productController.getProductReviewsEager)
+router.get('/getProductReviewsLazy/:id', productController.getProductReviewsLazy)
 
 
 router.get('/allReviews', reviewController.getAllReviews)
@@ -26,7 +27,8 @@ router.get('/allOrdersPaginated', orderController.getAllOrdersPaginated)
 
 router.get('/allCustomers', customerController.getAllCustomers)
 router.get('/allCustomersPaginated', customerController.getAllCustomersPaginated)
-router.get('/getCustomerOrders/:id', customerController.getCustomerOrders)
+router.get('/getCustomerOrdersEager/:id', customerController.getCustomerOrdersEager)
+router.get('/getCustomerOrdersLazy/:id', customerController.getCustomerOrdersLazy)
 
 
 module.exports = router

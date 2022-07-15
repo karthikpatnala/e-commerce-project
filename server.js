@@ -4,7 +4,8 @@ const cors = require('cors')
 const app = express()
 const bodyParser = require('body-parser')
 const sequelize=require('./models/index.js')
-
+const morgan= require('morgan')
+app.use(morgan('tiny'))
 app.use(express.json())
 const jsonParser = express.json()
 app.use(jsonParser);

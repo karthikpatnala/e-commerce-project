@@ -13,7 +13,7 @@ app.use(jsonParser);
 app.use(express.urlencoded({ extended: true }))
 
 const router = require('./routes.js')
-console.log(router);
+//console.log(router);
 app.use('/api', router)
  
 

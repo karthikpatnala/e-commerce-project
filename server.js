@@ -4,7 +4,6 @@ const cors = require('cors')
 const app = express()
 const bodyParser = require('body-parser')
 const sequelize=require('./models/index.js')
-
 app.use(express.json())
 const jsonParser = express.json()
 app.use(jsonParser);
@@ -12,7 +11,7 @@ app.use(jsonParser);
 app.use(express.urlencoded({ extended: true }))
 
 const router = require('./routes.js')
-console.log(router);
+//console.log(router);
 app.use('/api', router)
  
 

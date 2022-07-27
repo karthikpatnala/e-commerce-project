@@ -43,10 +43,12 @@ db.products = require('./product.js')(sequelize, DataTypes)
 db.reviews = require('./review.js')(sequelize, DataTypes)
 db.orders = require('./orders.js')(sequelize, DataTypes)
 db.customers = require('./customers.js')(sequelize, DataTypes)
-db.sequelize.sync({alter:true})
- .then(() => {
-     console.log('re sync applied successfully!')
-})
+db.users = require('./users.js')(sequelize, DataTypes)
+
+// db.sequelize.sync({alter:true})
+//  .then(() => {
+//      console.log('re sync applied successfully!')
+// })
 
 
 db.products.hasMany(db.reviews, {
@@ -77,4 +79,5 @@ db.products.belongsTo(db.orders, {
  foreignKey: 'order_id',
  as: 'orders'
 })
+
 module.exports = {db,sequelize}

@@ -76,7 +76,6 @@ const deleteProduct = async (req, res) => {
 const getProductReviewsEager =  async (req, res) => {
 
     const id = req.params.id
-
     const data = await Product.findOne({
         include: [{
             model: Review,
@@ -84,23 +83,23 @@ const getProductReviewsEager =  async (req, res) => {
         }],
         where: {productId: id }
     })
-
-    res.status(200).send(data)
+   res.status(200).send(data)
 
 }
-const getProductReviewsLazy =  async (req, res) => {
 
+const getProductReviewsLazy =  async (req, res) => {
     const id = req.params.id 
 
     const product1 = await Product.findByPk(id);
     const review1  = await product1.getReview();
     res.status(200).send(review1)
-
+    
 }
 
 
+
 module.exports = {
-    addProduct,
+    addProduct, 
     getAllProducts,
     getOneProduct,
     updateProduct,

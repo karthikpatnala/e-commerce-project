@@ -13,7 +13,7 @@ let info = {
 
 const product = await Product.create(info)
     res.status(200).send(product)
-    console.log(product)
+    console.log(info)
 
 }
 

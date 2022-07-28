@@ -1,0 +1,12 @@
+er diagram(app.diagrams.net)
+user manual
+db diagram.io(*)
+customer flow chart
+requirements,database design,api planning,code setup(dependencies),api development(business logic,database connection),swagger,final- flow charts
+deployment-1 staging//dev//testing env
+jenkins 
+
+2- production env//live or client env
+
+
+ payment portal-stripe

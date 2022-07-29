@@ -19,8 +19,7 @@ const swaggerJsDoc = require("swagger-jsdoc");
  *              description: Page not found 
  */
 
-router.get('/testing',(req,res)=>{res.send('testing api working')})
-
+router.get('/testing',(req,res)=>{res.send('testing api working')});
 /**
  * @swagger
  * components:
@@ -49,6 +48,7 @@ router.get('/testing',(req,res)=>{res.send('testing api working')})
  *         order_id:
  *           type: integer
  *           description: The related order id of the product
+ * 
  *      
  */
 
@@ -201,15 +201,198 @@ router.get('/getProductReviewsEager/:id', productController.getProductReviewsEag
 router.get('/getProductReviewsLazy/:id', productController.getProductReviewsLazy)
 
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Reviews:
+ *       type: object
+ *       required:
+ *         - id
+ *         - createdAt
+ *         - updatedAt
+ *         - rating
+ *         - description
+ *         - product_id
+ *       properties:
+ *         id:
+ *           type: integer
+ *           description: The auto-generated id of the product
+ *         createdAt:
+ *           type: null
+ *           description: The review was created
+ *         updatedAt:
+ *           type: null
+ *           description: The review was updated
+ *         rating:
+ *           type:integer
+ *           description: The rating of the related product      
+ *         description:
+ *           type: string
+ *           description: The description of the product
+ *         product_id:
+ *           type: integer
+ *           description: The related order id of the product
+ *      
+ */
+
+ /**
+  * @swagger
+  * tags:
+  *   name: Reviews
+  *   description: The Reviews managing API
+  */
+
+
+/**
+ * @swagger
+ * /allReviews:
+ *   get:
+ *     summary: Returns the list of all the Reviews
+ *     tags: [Reviews]
+ *     responses:
+ *       200:
+ *         description: The list of the Reviews
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Reviews'
+ * 
+ */
+
 router.get('/allReviews', reviewController.getAllReviews)
 router.get('/allReviewsPaginated', reviewController.getAllReviewsPaginated)
+
+/**
+ * @swagger
+ * /addReview/{id}:
+ *   post:
+ *     summary: Create a new review
+ *     tags: [Reviews]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Reviews'
+ *     responses:
+ *       200:
+ *         description: The review was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Reviews' 
+ *       500:
+ *         description: Unknown error 
+ */
+
+
+
 router.post('/addReview/:id', reviewController.addReview)
+
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Orders:
+ *       type: object
+ *       required:
+ *         - orderId
+ *         - customer_Id
+ *       properties:
+ *         orderId:
+ *           type: integer
+ *           description: The id of the order
+ *         customer_Id:
+ *           type: integer
+ *           description: The related order id of the customer
+ *      
+ */
+
+ /**
+  * @swagger
+  * tags:
+  *   name: Orders
+  *   description: The Oreders managing API
+  */
+ 
+/**
+ * @swagger
+ * /allOrders:
+ *   get:
+ *     summary: Returns the list of all the Orders
+ *     tags: [Orders]
+ *     responses:
+ *       200:
+ *         description: The list of all the Orders
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Orders'
+ * 
+ */
+
 
 
 router.get('/allOrders', orderController.getAllOrders) 
 router.get('/allOrdersPaginated', orderController.getAllOrdersPaginated)
 router.get('/getOrderedProductsEager/:id', orderController.getOrderedProductsEager)
 router.get('/getOrderedProductsLazy/:id', orderController.getOrderedProductsLazy)
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Customers:
+ *       type: object
+ *       required:
+ *         - customerId
+ *         - firstName
+ *         - lastName
+ *       properties:
+ *         customerId:
+ *           type: integer
+ *           description: The id of the customer
+ *         firstName:
+ *           type: string
+ *           description: The first name of the customer
+ *      
+ *         lastName:
+ *           type: string
+ *           description: The last name of the customer
+ *      
+ */
+
+ /**
+  * @swagger
+  * tags:
+  *   name: Customers
+  *   description: The Customers managing API
+  */
+ 
+/**
+ * @swagger
+ * /allCustomers:
+ *   get:
+ *     summary: Returns the list of all the Customers
+ *     tags: [Customers]
+ *     responses:
+ *       200:
+ *         description: The list of all the Customers
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Customers'
+ * 
+ */
+
+
 
 
 router.get('/allCustomers', customerController.getAllCustomers)

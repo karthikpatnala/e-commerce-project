@@ -8,6 +8,7 @@ const sequelize=require('./models/index.js')
 //app.use(morgan('tiny'))
 const swaggerUI = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
+const rateLimit=require('express-rate-limit')
 app.use(express.json())
 const jsonParser = express.json()
 app.use(jsonParser);

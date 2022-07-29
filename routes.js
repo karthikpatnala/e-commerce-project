@@ -5,7 +5,11 @@ const customerController = require('./controllers/customerController')
 const router = require('express').Router()
 const swaggerUI = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
-
+const rateLimit=require('express-rate-limit')
+const limiter=rateLimit({
+    max :5,
+    windowMs : 10000
+})
 /**
  * @swagger
  * /testing:
@@ -19,7 +23,7 @@ const swaggerJsDoc = require("swagger-jsdoc");
  *              description: Page not found 
  */
 
-router.get('/testing',(req,res)=>{res.send('testing api working')});
+router.get('/testing',limiter,(req,res)=>{res.send('testing api working')});
 /**
  * @swagger
  * components:
@@ -85,7 +89,7 @@ router.get('/testing',(req,res)=>{res.send('testing api working')});
  */
 
 
-router.post('/addProduct' , productController.addProduct)
+router.post('/addProduct' ,limiter, productController.addProduct)
 
 
 
@@ -106,7 +110,7 @@ router.post('/addProduct' , productController.addProduct)
  *                 $ref: '#/components/schemas/Products'
  */
 
-router.get('/allProducts', productController.getAllProducts)
+router.get('/allProducts',limiter, productController.getAllProducts)
 
 
 
@@ -135,7 +139,7 @@ router.get('/allProducts', productController.getAllProducts)
  */
 
 
-router.get('/productDetails/:id', productController.getOneProduct)
+router.get('/productDetails/:id',limiter, productController.getOneProduct)
 
 
 /**
@@ -170,7 +174,7 @@ router.get('/productDetails/:id', productController.getOneProduct)
  *        description: unknown error
  */
 
-router.put('/productEdit/:id', productController.updateProduct)
+router.put('/productEdit/:id',limiter, productController.updateProduct)
 
 /**
  * @swagger
@@ -262,7 +266,7 @@ router.get('/getProductReviewsLazy/:id', productController.getProductReviewsLazy
  * 
  */
 
-router.get('/allReviews', reviewController.getAllReviews)
+router.get('/allReviews',limiter, reviewController.getAllReviews)
 router.get('/allReviewsPaginated', reviewController.getAllReviewsPaginated)
 
 /**
@@ -339,7 +343,7 @@ router.post('/addReview/:id', reviewController.addReview)
 
 
 
-router.get('/allOrders', orderController.getAllOrders) 
+router.get('/allOrders', limiter, orderController.getAllOrders) 
 router.get('/allOrdersPaginated', orderController.getAllOrdersPaginated)
 router.get('/getOrderedProductsEager/:id', orderController.getOrderedProductsEager)
 router.get('/getOrderedProductsLazy/:id', orderController.getOrderedProductsLazy)
@@ -395,7 +399,7 @@ router.get('/getOrderedProductsLazy/:id', orderController.getOrderedProductsLazy
 
 
 
-router.get('/allCustomers', customerController.getAllCustomers)
+router.get('/allCustomers',limiter, customerController.getAllCustomers)
 router.get('/allCustomersPaginated', customerController.getAllCustomersPaginated)
 router.get('/getCustomerOrdersEager/:id', customerController.getCustomerOrdersEager)
 router.get('/getCustomerOrdersLazy/:id', customerController.getCustomerOrdersLazy)

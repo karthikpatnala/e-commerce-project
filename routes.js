@@ -6,8 +6,6 @@ const customerController = require('./controllers/customerController')
 const {db} = require('./models/index.js')
 const User = db.users
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
-require('dotenv').config()
 
 
 const router = require('express').Router()
@@ -40,16 +38,10 @@ router.get('/getCustomerOrdersEager/:id', customerController.getCustomerOrdersEa
 router.get('/getCustomerOrdersLazy/:id', customerController.getCustomerOrdersLazy)
 //user routes
 
-router.get('/users', async(req,res)=>{
+router.get('/users',async(req,res)=>{
     let userDetails = await User.findAll({});
     res.status(200).send(userDetails);
 })
-
-router.get('/users/fullname',authenicateToken , async(req,res)=>{
-    //let userDetails = await User.findOne({where : { userName : req.user}});
-    res.status(200).send(req.user);
-})
-
 
 router.post('/users',async(req,res)=>{
     const {fullName, userName, password} = await req.body;
@@ -64,8 +56,6 @@ router.post('/users',async(req,res)=>{
     const user1 = await User.create(info)
     res.status(200).send(user1)
 })
-
-
 router.post('/users/login', async(req, res)=>{
     const givenUser = req.body.userName
     const user = await User.findOne({givenUser})
@@ -83,26 +73,4 @@ router.post('/users/login', async(req, res)=>{
          res.status(500).send
     }
 })
-
-
-router.post('/login', (req,res)=>{
-    const username = req.body.userName
-    const user = { name: username }
-
-   const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
-   res.send(accessToken);
-})
-
-function authenicateToken(req, res, next){
-    const authHeader = req.headers['authorization']
-    const token = authHeader && authHeader.split(' ')[1]
-    if(token==null) return res.sendStatus(401)
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET,(err, user)=>{
-        if(err) return res.sendStatus(403)
-        req.user = user
-        next()
-    })
-
-}
-
 module.exports = router

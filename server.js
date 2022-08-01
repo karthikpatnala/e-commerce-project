@@ -14,7 +14,7 @@ const router = require('./routes.js')
 //console.log(router);
 app.use('/api', router)
  
-
+console.log("server started");
 const PORT = process.env.PORT || 3000
 
 

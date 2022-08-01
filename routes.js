@@ -17,7 +17,7 @@ router.post('/addProduct' , productController.addProduct)
 router.get('/allProducts', productController.getAllProducts)
 router.get('/productDetails/:id', productController.getOneProduct)
 router.put('/productEdit/:id', productController.updateProduct)
-const router = require('express').Router()
+
 const swaggerUI = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
 const rateLimit=require('express-rate-limit')

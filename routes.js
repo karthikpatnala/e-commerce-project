@@ -10,6 +10,7 @@ const bcrypt = require('bcrypt')
 
 const router = require('express').Router()
 router.get('/testing',(req,res)=>{res.send('testing api working')})
+
 //product routes
 router.post('/addProduct' , productController.addProduct)
 router.get('/allProducts', productController.getAllProducts)
@@ -19,7 +20,7 @@ router.delete('/deleteProduct/:id', productController.deleteProduct)
 router.get('/allProductsPaginated', productController.getAllProductsPaginated)
 router.get('/getProductReviewsEager/:id', productController.getProductReviewsEager)
 router.get('/getProductReviewsLazy/:id', productController.getProductReviewsLazy)
-
+console.log("Hii");
 //review routes
 router.get('/allReviews', reviewController.getAllReviews)
 router.get('/allReviewsPaginated', reviewController.getAllReviewsPaginated)

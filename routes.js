@@ -454,7 +454,7 @@ router.post('/users',async(req,res)=>{
 
 router.post('/users/login', async(req, res)=>{
     const givenUser = req.body.userName
-    const user = await User.findOne({givenUser})
+    const user = await User.findOne({where : {userName : givenUser}})
     if(user==null){
         return res.status(400).send('cannot find user')
     }

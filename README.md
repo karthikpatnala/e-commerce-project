@@ -1,4 +1,4 @@
-# gyt-workz-e_commerce-project
+#e-commerce-project
 
 ## Description
 The Back-end for an e-commerce site which was created using Express.js and Sequelize. The application allows the user to get, create, delete, and update reviews, products, orders and customers for the e-commerce site. 
